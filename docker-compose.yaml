@@ -1,0 +1,69 @@
+version: '3'
+services:
+  config-server:
+    container_name: config-server
+    build:
+      context: ./config
+      dockerfile: Dockerfile
+    image: config-server:latest
+    ports:
+      - 8081:8081
+    healthcheck:
+      test: "exit 0"
+    networks:
+      - backend
+  discovery-server:
+    container_name: discovery-server
+    build:
+      context: ./discovery
+      dockerfile: Dockerfile
+    image: discovery-server:latest
+    ports:
+      - 8082:8082
+    depends_on:
+      config-server:
+        condition: service_healthy
+    networks:
+      - backend
+  gateway-server:
+    container_name: gateway-server
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    image: gateway-server:latest
+    ports:
+      - 8080:8080
+    depends_on:
+      config-server:
+        condition: service_healthy
+    networks:
+      - backend
+  hotel-server:
+    container_name: hotel-server
+    build:
+      context: ./hotel-service
+      dockerfile: Dockerfile
+    image: hotel-server:latest
+    ports:
+      - 8083:8083
+    depends_on:
+      config-server:
+        condition: service_healthy
+    networks:
+      - backend
+  flight-server:
+    container_name: flight-server
+    build:
+      context: ./flight-service
+      dockerfile: Dockerfile
+    image: flight-server:latest
+    ports:
+      - 8084:8084
+    depends_on:
+      config-server:
+        condition: service_healthy
+    networks:
+      - backend
+networks:
+  backend:
+    driver: bridge

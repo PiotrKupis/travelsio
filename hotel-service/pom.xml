@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.travelsio</groupId>
 	<artifactId>hotel-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>hotel-service</name>
 	<description>hotel-service</description>
 	<properties>
