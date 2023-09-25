@@ -25,11 +25,9 @@ public class LocationService {
     private final LocationRepository locationRepository;
     private final BookingApiClient bookingApiClient;
 
-    public Long getLocation(String searchedLocation) {
-
-        Location foundLocation = locationRepository.findMostPopularByLabel(searchedLocation)
+    public Location getLocation(String searchedLocation) {
+        return locationRepository.findMostPopularByLabel(searchedLocation)
                 .orElseGet(() -> getMostPopularNewLocation(searchedLocation));
-        return foundLocation.getDestinationId();
     }
 
     private Location getMostPopularNewLocation(String searchedLocation) {

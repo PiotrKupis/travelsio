@@ -2,7 +2,6 @@ package com.travelsio.hotelservice.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "location")
 @Getter
 @Setter
 @Builder
@@ -18,8 +16,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Location extends AbstractEntity{
 
-    @Column(name = "destination_id")
-    private Long destinationId;
+    @Column(name = "external_id")
+    private Long externalId;
     private String country;
     private String region;
     private String name;

@@ -1,5 +1,6 @@
 package com.travelsio.hotelservice.controller;
 
+import com.travelsio.hotelservice.entity.Location;
 import com.travelsio.hotelservice.service.LocationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class LocationController {
 
     @GetMapping("{location}")
     public ResponseEntity<Long> getLocation(@PathVariable("location") String searchedLocation) {
-        Long destinationId = locationService.getLocation(searchedLocation);
-        return ResponseEntity.ok(destinationId);
+        Location location = locationService.getLocation(searchedLocation);
+        return ResponseEntity.ok(location.getExternalId());
     }
 }

@@ -18,7 +18,7 @@ public class LocationMapper {
 
     public static Location fromBookingApi(Map<String, Object> locationJson) {
         return Location.builder()
-            .destinationId(Long.parseLong((String) locationJson.get(DEST_ID_KEY)))
+            .externalId(Long.parseLong((String) locationJson.get(DEST_ID_KEY)))
             .country((String) locationJson.get(COUNTRY_KEY))
             .region((String) locationJson.get(REGION_KEY))
             .name((String) locationJson.get(NAME_KEY))
