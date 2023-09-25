@@ -1,9 +1,8 @@
 package com.travelsio.hotelservice.controller;
 
 import com.travelsio.hotelservice.dto.Flight;
-import com.travelsio.hotelservice.entity.Hotel;
+import com.travelsio.hotelservice.model.Hotel;
 import com.travelsio.hotelservice.service.HotelService;
-import java.util.Arrays;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,20 +19,9 @@ public class HotelController {
 
     private final HotelService hotelService;
 
-    private final List<Hotel> hotels = Arrays.asList(
-        new Hotel(1L, "Hotel1"),
-        new Hotel(1L, "Hotel2"));
-
-    @GetMapping
-    public List<Hotel> getHotels() {
-        return hotels;
-    }
-
-    @GetMapping("/{hotelId}")
-    public Hotel getHotel(@PathVariable("hotelId") Long hotelId) {
-        return hotels.stream()
-            .filter(hotel -> hotel.getId().equals(hotelId))
-            .findFirst().orElse(null);
+    @GetMapping("/{location}")
+    public ResponseEntity<List<Hotel>> getHotel(@PathVariable("location") String location) {
+        return ResponseEntity.ok(hotelService.getHotelsByLocation(location));
     }
 
     @GetMapping("/flight")
