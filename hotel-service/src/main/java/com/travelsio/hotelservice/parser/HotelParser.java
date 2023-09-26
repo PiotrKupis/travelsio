@@ -1,4 +1,4 @@
-package com.travelsio.hotelservice.Parser;
+package com.travelsio.hotelservice.parser;
 
 import com.travelsio.hotelservice.model.Hotel;
 import java.math.BigDecimal;

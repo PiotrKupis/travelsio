@@ -12,6 +12,6 @@ public interface LocationRepository extends JpaRepository<Location, Long> {
 
     @Query(value = "SELECT * FROM Location loc "
         + "WHERE UPPER(loc.label) LIKE UPPER(CONCAT('%', :label, '%')) "
-        + "ORDER BY loc.hotels_quantity LIMIT 1", nativeQuery = true)
+        + "ORDER BY loc.hotels_quantity DESC LIMIT 1", nativeQuery = true)
     Optional<Location> findMostPopularByLabel(@Param("label") String label);
 }

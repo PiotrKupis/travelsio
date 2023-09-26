@@ -1,7 +1,7 @@
 package com.travelsio.hotelservice.service;
 
-import com.travelsio.hotelservice.Parser.HotelParser;
-import com.travelsio.hotelservice.Parser.HtmlParser;
+import com.travelsio.hotelservice.parser.HotelParser;
+import com.travelsio.hotelservice.parser.HtmlParser;
 import com.travelsio.hotelservice.entity.Location;
 import com.travelsio.hotelservice.model.Hotel;
 import java.util.List;

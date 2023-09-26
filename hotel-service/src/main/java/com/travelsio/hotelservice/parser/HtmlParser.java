@@ -1,4 +1,4 @@
-package com.travelsio.hotelservice.Parser;
+package com.travelsio.hotelservice.parser;
 
 import java.io.IOException;
 import org.jsoup.Jsoup;
