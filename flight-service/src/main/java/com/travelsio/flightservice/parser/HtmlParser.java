@@ -24,7 +24,7 @@ public class HtmlParser {
         WebDriver webDriver =  new FirefoxDriver(options);
         webDriver.get(url);
         try {
-            Thread.sleep(3000);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             //TODO add exception handling
             e.printStackTrace();
