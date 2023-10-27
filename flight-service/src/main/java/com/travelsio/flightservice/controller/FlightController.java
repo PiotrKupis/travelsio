@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +20,15 @@ public class FlightController {
     private final FlightService flightService;
 
     @GetMapping("/{departureAP}/{arrivalAP}/{adults}/{departure}/{arrival}")
-    public List<Offer> getFlightOffers(@PathVariable("departureAP") String departureAP,
+    public ResponseEntity<List<Offer>> getFlightOffers(
+        @PathVariable("departureAP") String departureAP,
         @PathVariable("arrivalAP") String arrivalAP,
         @PathVariable("adults") Integer adults,
         @PathVariable("departure") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate departure,
         @PathVariable("arrival") @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate arrival) {
 
-        return flightService.getFlightOffers(departureAP, arrivalAP, adults, departure, arrival);
+        List<Offer> offers = flightService.getFlightOffers(departureAP, arrivalAP, adults,
+            departure, arrival);
+        return ResponseEntity.ok(offers);
     }
 }
