@@ -1,9 +1,10 @@
 package com.travelsio.hotelservice.service;
 
-import com.travelsio.hotelservice.parser.HotelParser;
-import com.travelsio.hotelservice.parser.HtmlParser;
 import com.travelsio.hotelservice.entity.Location;
 import com.travelsio.hotelservice.model.Hotel;
+import com.travelsio.hotelservice.parser.HotelParser;
+import com.travelsio.hotelservice.parser.HtmlParser;
+import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.nodes.Document;
@@ -18,22 +19,23 @@ public class HotelService {
     private final HtmlParser htmlParser;
     private final HotelParser hotelParser;
 
-    public List<Hotel> getHotelsByLocation(String searchedLocation) {
+    public List<Hotel> findHotels(String destination, Integer adults, LocalDate checkin,
+        LocalDate checkout) {
 
-        Location location = locationService.getLocation(searchedLocation);
+        Location location = locationService.getLocation(destination);
 
         String url = UriComponentsBuilder
             .fromUriString("https://www.booking.com/searchresults.pl.html")
             .queryParam("dest_id", location.getExternalId())
             .queryParam("dest_type", location.getType())
-            .queryParam("group_adults", "2")
+            .queryParam("group_adults", adults)
             .queryParam("order", "price")
-            .queryParam("checkin_year", "2023")
-            .queryParam("checkin_month", "10")
-            .queryParam("checkin_monthday", "12")
-            .queryParam("checkout_year", "2023")
-            .queryParam("checkout_month", "10")
-            .queryParam("checkout_monthday", "17")
+            .queryParam("checkin_year", checkin.getYear())
+            .queryParam("checkin_month", checkin.getMonth().getValue())
+            .queryParam("checkin_monthday", checkin.getDayOfMonth())
+            .queryParam("checkout_year", checkout.getYear())
+            .queryParam("checkout_month", checkout.getMonth().getValue())
+            .queryParam("checkout_monthday", checkout.getDayOfMonth())
             .build()
             .toUriString();
 
