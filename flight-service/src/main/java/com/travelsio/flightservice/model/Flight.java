@@ -1,28 +1,17 @@
 package com.travelsio.flightservice.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Flight {
 
-    private Long id;
-    private String destination;
-
-    public Flight(Long id, String destination) {
-        this.id = id;
-        this.destination = destination;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
+    private String departure;
+    private String departureAirport;
+    private String arrival;
+    private String arrivalAirport;
+    private String duration;
 }

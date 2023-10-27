@@ -11,9 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class HtmlParser {
 
-    private final WebDriver webDriver;
+    public Document parse(String url) {
 
-    public HtmlParser() {
         WebDriverManager.firefoxdriver().setup();
 
         FirefoxOptions options = new FirefoxOptions();
@@ -22,11 +21,7 @@ public class HtmlParser {
         options.addArguments("--lang=en-US,en;q=0.9");
         options.addArguments("--referer=https://www.google.com/");
 
-        webDriver =  new FirefoxDriver(options);
-    }
-
-    public Document parse(String url) {
-
+        WebDriver webDriver =  new FirefoxDriver(options);
         webDriver.get(url);
         try {
             Thread.sleep(3000);
@@ -40,5 +35,4 @@ public class HtmlParser {
 
         return document;
     }
-
 }
